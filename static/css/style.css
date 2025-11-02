@@ -1,0 +1,82 @@
+/* static/css/style.css */
+
+/* =================================
+   1. BASE STYLES & LAYOUT
+   ================================= */
+body { 
+    background-color: #f4f7f6; /* Nền trắng xám nhẹ */
+    padding-bottom: 50px; 
+    font-family: 'Arial', sans-serif;
+}
+
+/* =================================
+   2. NAVBAR & HEADER
+   ================================= */
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #ffffff !important;
+}
+
+/* =================================
+   3. CARDS & DOCTOR LIST (Chuyên nghiệp hơn)
+   ================================= */
+.card {
+    border: none; /* Loại bỏ viền thô */
+    border-radius: 12px; /* Bo tròn góc */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Đổ bóng nhẹ */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Hiệu ứng di chuột (hover effect) */
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.card-title { 
+    font-weight: 600; 
+    font-size: 1.35rem;
+    color: #007bff; /* Màu xanh dương chủ đạo */
+    margin-bottom: 0.5rem;
+}
+
+/* Định dạng tên chuyên khoa */
+.card-text {
+    color: #555;
+    font-size: 1rem;
+}
+
+/* =================================
+   4. BUTTONS (Nút)
+   ================================= */
+/* Nút Đặt lịch (chủ đạo) */
+.btn-primary, .btn-info {
+    border-radius: 25px; /* Nút bo tròn */
+    padding: 8px 20px;
+    font-weight: 500;
+}
+
+/* =================================
+   5. TABLE (Bảng Lịch hẹn)
+   ================================= */
+.table th {
+    background-color: #e9ecef; /* Nền đầu bảng */
+    color: #333;
+    font-weight: 600;
+}
+
+/* Các thẻ badge trạng thái (pending, accepted...) */
+.badge {
+    padding: 0.5em 0.8em;
+    border-radius: 15px;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+/* Màu sắc chuyên biệt cho Trạng thái */
+.bg-warning { background-color: #ffc107; color: #333; }
+.bg-success { background-color: #28a745; }
+.bg-danger { background-color: #dc3545; }
+.bg-primary { background-color: #007bff; }
+.bg-info { background-color: #17a2b8; }

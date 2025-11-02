@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Lịch hẹn của tôi{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Lịch hẹn của tôi</h2>
+
+{% if appts %}
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>ID Lịch hẹn</th>
+                    <th>Thời gian</th>
+                    {% if user.role == 'doctor' %}
+                        <th>Bệnh nhân</th>
+                    {% else %}
+                        <th>Bác sĩ</th>
+                    {% endif %}
+                    <th>Ghi chú</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ap in appts %} 
+                <tr>
+                    <td>#{{ ap.id }}</td>
+                    <td>{{ ap.time }}</td>
+                    
+                    {% if user.role == 'doctor' %}
+                        <td>{{ ap.patient_info.full_name }}</td>
+                    {% else %}
+                        <td>{{ ap.doctor_user.full_name }} ({{ ap.doctor_profile.specialty }})</td>
+                    {% endif %}
+                    
+                    <td>{{ ap.note }}</td>
+                    <td><span class="badge bg-{{ 'warning' if ap.status == 'pending' else 'success' if ap.status == 'accepted' or ap.status == 'completed' else 'danger' }}">{{ ap.status | upper }}</span></td>
+                    
+                    <td>
+                        {% if user.role == 'doctor' %}
+                            {% if ap.status == 'pending' %}
+                                <a href="{{ url_for('appointment_action', ap_id=ap.id, act='accept') }}" class="btn btn-sm btn-success me-1">Xác nhận</a>
+                                <a href="{{ url_for('appointment_action', ap_id=ap.id, act='reject') }}" class="btn btn-sm btn-danger">Từ chối</a>
+                            
+                            {% elif ap.status == 'accepted' %}
+                                {% if ap.has_record %}
+                                    <span class="badge bg-primary">Đã có Hồ sơ</span> 
+                                {% else %}
+                                    <a href="{{ url_for('create_record', ap_id=ap.id) }}" class="btn btn-sm btn-info">Tạo Hồ sơ</a>
+                                {% endif %}
+                            
+                            {% elif ap.status == 'completed' %}
+                                <span class="badge bg-success">Đã hoàn tất</span>
+                            
+                            {% else %}
+                                <span class="badge bg-secondary">{{ ap.status }}</span>
+                            {% endif %}
+                        {% else %}
+                            {% if ap.status == 'pending' %}
+                                <span class="text-info">Đang chờ xác nhận</span>
+                            {% elif ap.status == 'rejected' %}
+                                <span class="text-danger">Bị từ chối</span>
+                            {% elif ap.status == 'accepted' or ap.status == 'completed' %}
+                                <span class="text-success">Đã xác nhận</span>
+                            {% else %}
+                                -
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %} 
+                </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="alert alert-info">Bạn không có lịch hẹn nào.</div>
+{% endif %}
+
+{% endblock %}

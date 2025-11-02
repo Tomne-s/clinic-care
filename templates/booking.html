@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Đặt lịch với {{ doctor.name }}</h3>
+<form method="post">
+  <div class="mb-3">
+    <label class="form-label">Thời gian (ví dụ: 2025-10-25 09:00)</label>
+    <input class="form-control" name="time" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Ghi chú</label>
+    <textarea class="form-control" name="note"></textarea>
+  </div>
+  <button class="btn btn-success">Xác nhận đặt lịch</button>
+</form>
+{% endblock %}

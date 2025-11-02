@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Danh sách bác sĩ</h3>
+<div class="row">
+  {% for d in doctors %}
+  <div class="col-md-6">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ d.name }}</h5>
+        <p class="card-text">Chuyên khoa: {{ d.specialty }}</p>
+        <a href="{{ url_for('booking', doctor_id=d.id) }}" class="btn btn-primary">Đặt lịch</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

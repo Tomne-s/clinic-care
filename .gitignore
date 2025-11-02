@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/  # Bỏ qua thư mục môi trường ảo
+*venv*/
+
+# Database & Logs
+database.db # Bỏ qua file database
+*.log
+
+# Flask/IDE
+instance/
+.flaskenv
+.vscode/

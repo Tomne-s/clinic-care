@@ -1,0 +1,30 @@
+{% extends "base.html" %} 
+{% block title %}Tạo Hồ sơ Bệnh án{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Tạo Hồ sơ Bệnh án cho Lịch hẹn #{{ ap.id }}</h2>
+    
+    <div class="card bg-light p-3 mb-4">
+        <h5>Thông tin Bệnh nhân</h5>
+        <p><strong>Tên:</strong> {{ patient.full_name }}</p>
+        <p><strong>Thời gian hẹn:</strong> {{ ap.time }}</p>
+        <p><strong>Ghi chú từ Bệnh nhân:</strong> {{ ap.note | default('Không có ghi chú', true) }}</p>
+    </div>
+
+    <form method="POST" action="{{ url_for('create_record', ap_id=ap.id) }}">
+        <div class="mb-3">
+            <label for="diagnosis" class="form-label">Chẩn đoán <span class="text-danger">*</span></label>
+            <textarea class="form-control" id="diagnosis" name="diagnosis" rows="5" required></textarea>
+        </div>
+        
+        <div class="mb-4">
+            <label for="treatment" class="form-label">Phương pháp điều trị / Đơn thuốc</label>
+            <textarea class="form-control" id="treatment" name="treatment" rows="5"></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Lưu Hồ sơ Bệnh án</button>
+        <a href="{{ url_for('my_appointments') }}" class="btn btn-secondary">Quay lại</a>
+    </form>
+</div>
+{% endblock %}
