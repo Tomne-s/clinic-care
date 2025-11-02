@@ -378,4 +378,7 @@ if __name__ == "__main__":
         init_db()
     app.run(debug=True, use_reloader=False)
 
-    
+@app.route('/')
+def test():
+    return "Flask chạy OK trên Render!"
+  
